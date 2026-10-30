@@ -1,0 +1,59 @@
+:host {
+  display: block;
+  min-height: 100vh;
+}
+
+.login-page {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 32px;
+  background: #f1f5f9;
+  box-sizing: border-box;
+}
+
+.login-layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+  align-items: center;
+  width: 100%;
+  max-width: 1100px;
+  min-height: 600px;
+  padding: 24px;
+  background: #ffffff;
+  border-radius: 24px;
+  box-shadow: 0 10px 40px rgb(0 0 0 / 8%);
+  box-sizing: border-box;
+}
+
+.image-section {
+  height: 520px;
+  min-width: 0;
+}
+
+.form-section {
+  min-width: 0;
+  padding: 24px;
+}
+
+@media (max-width: 768px) {
+  .login-page {
+    padding: 16px;
+  }
+
+  .login-layout {
+    grid-template-columns: 1fr;
+    gap: 24px;
+    padding: 16px;
+  }
+
+  .image-section {
+    height: 220px;
+  }
+
+  .form-section {
+    padding: 8px;
+  }
+}
