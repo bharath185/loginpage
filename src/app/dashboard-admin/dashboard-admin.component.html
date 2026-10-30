@@ -1,0 +1,200 @@
+<div class="dashboard-container" [class.sidebar-collapsed]="!sidebarOpen">
+
+  <!-- ============ SIDEBAR ============ -->
+  <aside class="sidebar">
+    <div class="sidebar-header">
+      <div class="logo">
+        <span class="logo-icon">◆</span>
+        <span class="logo-text" *ngIf="sidebarOpen">AdminPanel</span>
+      </div>
+    </div>
+
+    <nav class="sidebar-nav">
+      <a class="nav-item active">
+        <span class="nav-icon">📊</span>
+        <span class="nav-label" *ngIf="sidebarOpen">Dashboard</span>
+      </a>
+      <a class="nav-item">
+        <span class="nav-icon">📦</span>
+        <span class="nav-label" *ngIf="sidebarOpen">Orders</span>
+      </a>
+      <a class="nav-item">
+        <span class="nav-icon">🛍️</span>
+        <span class="nav-label" *ngIf="sidebarOpen">Products</span>
+      </a>
+      <a class="nav-item">
+        <span class="nav-icon">👥</span>
+        <span class="nav-label" *ngIf="sidebarOpen">Customers</span>
+      </a>
+      <a class="nav-item">
+        <span class="nav-icon">📈</span>
+        <span class="nav-label" *ngIf="sidebarOpen">Analytics</span>
+      </a>
+      <a class="nav-item">
+        <span class="nav-icon">⚙️</span>
+        <span class="nav-label" *ngIf="sidebarOpen">Settings</span>
+      </a>
+    </nav>
+
+    <div class="sidebar-footer" *ngIf="sidebarOpen">
+      <div class="upgrade-card">
+        <h4>Upgrade to Pro</h4>
+        <p>Unlock advanced analytics</p>
+        <button class="btn-upgrade">Upgrade Now</button>
+      </div>
+    </div>
+  </aside>
+
+  <!-- ============ MAIN CONTENT ============ -->
+  <main class="main-content">
+
+    <!-- Top Bar -->
+    <header class="topbar">
+      <button class="menu-toggle" (click)="toggleSidebar()">☰</button>
+
+      <div class="search-box">
+        <span class="search-icon">🔍</span>
+        <input type="text" placeholder="Search anything..." />
+      </div>
+
+      <div class="topbar-actions">
+        <button class="icon-btn" title="Notifications">
+          🔔<span class="badge">3</span>
+        </button>
+        <button class="icon-btn" title="Messages">✉️</button>
+        <div class="user-profile">
+          <div class="avatar">JD</div>
+          <div class="user-info">
+            <span class="user-name">{{ userName }}</span>
+            <span class="user-role">Administrator</span>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Dashboard Body -->
+    <div class="dashboard-body">
+
+      <!-- Page Header -->
+      <div class="page-header">
+        <div>
+          <h1>Welcome back, {{ userName }} 👋</h1>
+          <p class="page-subtitle">Here's what's happening with your store today.</p>
+        </div>
+        <div class="page-date">{{ currentDate }}</div>
+      </div>
+
+      <!-- Stat Cards -->
+      <section class="stats-grid">
+        <div class="stat-card" *ngFor="let stat of stats"
+             [style.--accent]="stat.color">
+          <div class="stat-icon">{{ stat.icon }}</div>
+          <div class="stat-info">
+            <p class="stat-title">{{ stat.title }}</p>
+            <h3 class="stat-value">{{ stat.value }}</h3>
+            <span class="stat-change" [class.positive]="stat.change >= 0"
+                                     [class.negative]="stat.change < 0">
+              {{ stat.change >= 0 ? '▲' : '▼' }} {{ stat.change }}%
+            </span>
+          </div>
+        </div>
+      </section>
+
+      <!-- Charts + Recent Activity Grid -->
+      <section class="content-grid">
+
+        <!-- Sales Chart (placeholder) -->
+        <div class="card chart-card">
+          <div class="card-header">
+            <h2>Sales Overview</h2>
+            <div class="card-actions">
+              <button class="chip active">Week</button>
+              <button class="chip">Month</button>
+              <button class="chip">Year</button>
+            </div>
+          </div>
+          <div class="chart-placeholder">
+            <div class="chart-bar" style="height: 45%"></div>
+            <div class="chart-bar" style="height: 70%"></div>
+            <div class="chart-bar" style="height: 55%"></div>
+            <div class="chart-bar" style="height: 85%"></div>
+            <div class="chart-bar" style="height: 65%"></div>
+            <div class="chart-bar" style="height: 95%"></div>
+            <div class="chart-bar" style="height: 75%"></div>
+          </div>
+        </div>
+
+        <!-- Traffic Sources -->
+        <div class="card traffic-card">
+          <div class="card-header">
+            <h2>Traffic Sources</h2>
+          </div>
+          <ul class="traffic-list">
+            <li>
+              <span class="dot" style="background:#6366f1"></span>
+              <span class="label">Direct</span>
+              <div class="progress"><div class="progress-bar" style="width:65%;background:#6366f1"></div></div>
+              <span class="value">65%</span>
+            </li>
+            <li>
+              <span class="dot" style="background:#10b981"></span>
+              <span class="label">Social</span>
+              <div class="progress"><div class="progress-bar" style="width:48%;background:#10b981"></div></div>
+              <span class="value">48%</span>
+            </li>
+            <li>
+              <span class="dot" style="background:#f59e0b"></span>
+              <span class="label">Organic</span>
+              <div class="progress"><div class="progress-bar" style="width:72%;background:#f59e0b"></div></div>
+              <span class="value">72%</span>
+            </li>
+            <li>
+              <span class="dot" style="background:#ef4444"></span>
+              <span class="label">Referral</span>
+              <div class="progress"><div class="progress-bar" style="width:32%;background:#ef4444"></div></div>
+              <span class="value">32%</span>
+            </li>
+          </ul>
+        </div>
+
+      </section>
+
+      <!-- Recent Orders Table -->
+      <section class="card table-card">
+        <div class="card-header">
+          <h2>Recent Orders</h2>
+          <a class="view-all">View All →</a>
+        </div>
+        <div class="table-wrapper">
+          <table>
+            <thead>
+              <tr>
+                <th>Order ID</th>
+                <th>Customer</th>
+                <th>Product</th>
+                <th>Amount</th>
+                <th>Status</th>
+                <th>Date</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let order of recentOrders">
+                <td class="order-id">{{ order.id }}</td>
+                <td>{{ order.customer }}</td>
+                <td>{{ order.product }}</td>
+                <td class="amount">${{ order.amount.toFixed(2) }}</td>
+                <td>
+                  <span class="status" [ngClass]="getStatusClass(order.status)">
+                    {{ order.status }}
+                  </span>
+                </td>
+                <td class="date">{{ order.date }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+    </div>
+  </main>
+</div>

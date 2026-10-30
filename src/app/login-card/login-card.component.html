@@ -1,0 +1,66 @@
+
+
+
+<div class="login-page">
+  <div class="login-layout">
+    <div class="image-section">
+      <app-image-component></app-image-component>
+    </div>
+
+    <div class="form-section">
+      <div class="login-card">
+
+  <!-- Toast popup -->
+  <div class="toast-message"
+       *ngIf="showToast"
+       [class.error-toast]="toastMessage.includes('failed')">
+
+    <span class="toast-icon">
+      {{ toastMessage.includes('failed') ? '✕' : '✓' }}
+    </span>
+
+    {{ toastMessage }}
+  </div>
+
+
+
+  <div *ngIf="showflag">
+    <p>Sign in to continue</p>
+
+    <form (ngSubmit)="dologin({
+      username: username,
+      password: password
+    })">
+
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input
+          id="email"
+          type="text"
+          name="username"
+          [(ngModel)]="username"
+          placeholder="Enter your username"
+          required
+        />
+      </div>
+
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input
+          id="password"
+          type="password"
+          name="password"
+          [(ngModel)]="password"
+          placeholder="Enter your password"
+          required
+        />
+      </div>
+
+      <button type="submit">Login</button>
+    </form>
+  </div>
+</div>
+
+    </div>
+  </div>
+</div>
